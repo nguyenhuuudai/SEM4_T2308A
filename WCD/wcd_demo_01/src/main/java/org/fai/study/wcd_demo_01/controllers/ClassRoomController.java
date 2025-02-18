@@ -23,7 +23,9 @@ public class ClassRoomController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doGet(req, resp);
-        var classRoom = entityManager.createStoredProcedureQuery("GetAllClass", ClassRoom.class).getResultList();
+        var classRooms = entityManager.createStoredProcedureQuery("GetAllClass", ClassRoom.class).getResultList();
         System.out.println("Do get" );
+        req.setAttribute("classRooms", classRooms);
+        req.getRequestDispatcher("/views/classroom/index.jsp").forward(req, resp);
     }
 }
