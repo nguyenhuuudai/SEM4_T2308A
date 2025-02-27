@@ -28,4 +28,26 @@ public class ClassRoomController extends HttpServlet{
         req.setAttribute("classRooms", classRooms);
         req.getRequestDispatcher("/views/classroom/index.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try{
+            var class_name = req.getParameter("class_name");
+            var number = Integer.valueOf(req.getParameter("number_member"));
+            System.out.println("Class name "+class_name);
+            System.out.println("Number "+number);
+            entityManager.getTransaction().begin();
+            StoredProcedureQuery query = entityManager.createStoredProcedureQuery("SP_INSERT_CLASSROOM");
+            query.registerStoredProcedureParameter("className", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("numberMember", Integer.class, ParameterMode.IN);
+            query.setParameter("className", class_name);
+            query.setParameter("numberMember", number);
+            query.execute();
+            entityManager.getTransaction().commit();
+            resp.sendRedirect("./classroom");
+        }catch (Exception e){
+            entityManager.getTransaction().rollback();
+            resp.sendRedirect("./classroom");
+        }
+    }
 }

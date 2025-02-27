@@ -4,6 +4,9 @@
 <head>
     <title>JSP - Hello World</title>
 </head>
+<header>
+    <jsp:include page="includes/header.jsp"></jsp:include>
+</header>
 <body>
 <h1><%= "Hello World!" %>
 </h1>

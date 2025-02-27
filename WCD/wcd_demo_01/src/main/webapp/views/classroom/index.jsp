@@ -24,7 +24,26 @@
             crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<header>
+    <jsp:include page="../../includes/header.jsp"></jsp:include>
+</header>
 <body>
+<div class="container">
+    <h1>Add Classroom</h1>
+    <form method="post" action="classroom">
+        <div class="input-group m-2">
+            <label class="">Class name</label>
+            <input class="form-control" name="class_name">
+        </div>
+        <div class="input-group m2">
+            <label>Number</label>
+            <input class="form-control" name="number_member">
+        </div>
+<%--         UI--%>
+        <button class="btn btn-primary m-2" type="submit">Save</button>
+        <button class="btn btn-danger m-2" type="submit">Cancel</button>
+    </form>
+</div>
  <table class="table table-active">
      <thead>
       <th>Id</th>
