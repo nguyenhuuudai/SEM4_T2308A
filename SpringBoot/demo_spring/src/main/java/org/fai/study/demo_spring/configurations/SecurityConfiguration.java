@@ -38,19 +38,7 @@ public class SecurityConfiguration {
 //                .roles("CUSTOMER").build();
 //        return new InMemoryUserDetailsManager(user, admin, cs);
 //    }
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests(
-//                config-> config
-//                        .requestMatchers("/**").hasAnyRole("ADMIN","USER")
-//                        .anyRequest()).formLogin(
-//                        formLogin -> formLogin
-//                                .loginPage("/login")
-////                                .loginProcessingUrl("/login")
-//
-//        );
-//        return http.build();
-//    }
+
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
     httpSecurity.authorizeHttpRequests(
