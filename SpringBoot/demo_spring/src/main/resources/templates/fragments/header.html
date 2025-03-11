@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -26,15 +27,20 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/home/index}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/classroom/index}">Class</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/fresher/list}">Students</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/schelude/index}">Schedule</a>
-                </li>
+                <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/classroom/index}"  >Class</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/fresher/list}">Students</a>
+                    </li>
+                </div>
+                <div sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/schelude/index}">Schedule</a>
+                    </li>
+                </div>
+
             </ul>
         </div>
     </div>
