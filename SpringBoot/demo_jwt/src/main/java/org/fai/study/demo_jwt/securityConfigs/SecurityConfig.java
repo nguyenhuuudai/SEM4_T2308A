@@ -22,6 +22,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +45,8 @@ public class SecurityConfig {
     public SecurityFilterChain buildSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 config->config.requestMatchers("/api/v1/auth/token").permitAll()
-                              .anyRequest().authenticated());
+                              .anyRequest().authenticated())
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         return http.build();
     }
     @Bean
